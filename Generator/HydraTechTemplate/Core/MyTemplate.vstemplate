@@ -1,0 +1,43 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Core</Name>
+    <Description>Core Template LynxView</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Core</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Core.csproj" File="Core.csproj" ReplaceParameters="true">
+      <Folder Name="DTO" TargetFolderName="DTO">
+        <Folder Name="Helpers" TargetFolderName="Helpers">
+          <ProjectItem ReplaceParameters="true" TargetFileName="DtoFilterPagedList.cs">DtoFilterPagedList.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DtoTextValueGeneric.cs">DtoTextValueGeneric.cs</ProjectItem>
+        </Folder>
+        <Folder Name="Usuarios" TargetFolderName="Usuarios">
+          <ProjectItem ReplaceParameters="true" TargetFileName="DtoUser.cs">DtoUser.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DtoUserCreate.cs">DtoUserCreate.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="DtoUserUpdate.cs">DtoUserUpdate.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Helpers" TargetFolderName="Helpers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="PagedList.cs">PagedList.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Interfaces" TargetFolderName="Interfaces">
+        <Folder Name="Services" TargetFolderName="Services">
+          <ProjectItem ReplaceParameters="true" TargetFileName="IUsuarioService.cs">IUsuarioService.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Services" TargetFolderName="Services">
+        <ProjectItem ReplaceParameters="true" TargetFileName="UsuarioService.cs">UsuarioService.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>

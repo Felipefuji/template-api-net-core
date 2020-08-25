@@ -1,0 +1,35 @@
+﻿<VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+	<TemplateData>
+		<Name>FelipeFuji Template API</Name>
+		<Description>Custom template for API in Net Core 3.1</Description>
+		<ProjectType>CSharp</ProjectType>
+		<ProjectSubType>
+		</ProjectSubType>
+		<SortOrder>1000</SortOrder>
+		<CreateNewFolder>true</CreateNewFolder>
+		<DefaultName>APILynxView</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+		<Icon>__TemplateIcon.ico</Icon>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectCollection>
+			<SolutionFolder Name="src">
+				<ProjectTemplateLink ProjectName="$projectname$.API" CopyParameters="true">
+					API\MyTemplate.vstemplate
+				</ProjectTemplateLink>
+				<SolutionFolder Name="Service">
+					<ProjectTemplateLink ProjectName="Core" CopyParameters="true">
+						Core\MyTemplate.vstemplate
+					</ProjectTemplateLink>
+				</SolutionFolder>
+				<SolutionFolder Name="Infrastructure">
+					<ProjectTemplateLink ProjectName="Data" CopyParameters="true">
+						Data\MyTemplate.vstemplate
+					</ProjectTemplateLink>
+				</SolutionFolder>
+			</SolutionFolder>
+		</ProjectCollection>
+	</TemplateContent>
+</VSTemplate>

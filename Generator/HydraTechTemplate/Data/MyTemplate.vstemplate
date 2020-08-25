@@ -1,0 +1,42 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Data</Name>
+    <Description>Data Template LynxView</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Data</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <CreateInPlace>true</CreateInPlace>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Data.csproj" File="Data.csproj" ReplaceParameters="true">
+      <Folder Name="Data" TargetFolderName="Data">
+        <Folder Name="APIContext" TargetFolderName="APIContext">
+          <Folder Name="Configurations" TargetFolderName="Configurations">
+            <ProjectItem ReplaceParameters="true" TargetFileName="UsuariosConfiguration.cs">UsuariosConfiguration.cs</ProjectItem>
+          </Folder>
+          <Folder Name="Context" TargetFolderName="Context">
+            <ProjectItem ReplaceParameters="true" TargetFileName="APIContext.cs">APIContext.cs</ProjectItem>
+          </Folder>
+          <Folder Name="Models" TargetFolderName="Models">
+            <ProjectItem ReplaceParameters="true" TargetFileName="Usuarios.cs">Usuarios.cs</ProjectItem>
+          </Folder>
+        </Folder>
+      </Folder>
+      <Folder Name="Interfaces" TargetFolderName="Interfaces">
+        <Folder Name="Repositories" TargetFolderName="Repositories">
+          <ProjectItem ReplaceParameters="true" TargetFileName="IUsuariosRepository.cs">IUsuariosRepository.cs</ProjectItem>
+        </Folder>
+      </Folder>
+      <Folder Name="Repositories" TargetFolderName="Repositories">
+        <ProjectItem ReplaceParameters="true" TargetFileName="UsuariosRepository.cs">UsuariosRepository.cs</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
