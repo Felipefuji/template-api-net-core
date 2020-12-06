@@ -1,7 +1,7 @@
-﻿using $safeprojectname$.DTO.Helpers;
-using $safeprojectname$.DTO.Usuarios;
-using $safeprojectname$.Helpers;
-using $safeprojectname$.Interfaces.Services;
+﻿using Core.DTO.Helpers;
+using Core.DTO.User;
+using Core.Helpers;
+using Core.Interfaces.Services;
 using Data.Data.APIContext.Context;
 using Data.Data.APIContext.Models;
 using Data.Interfaces.Repositories;
@@ -14,17 +14,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace $safeprojectname$.Services
+namespace Core.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UserService : IUserService
     {
         #region Constructor
 
         private readonly APIContext _context;
         private readonly IMapper _mapper;
-        private readonly IUsuariosRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UsuarioService(APIContext context, IMapper mapper, IUsuariosRepository userRepository)
+        public UserService(APIContext context, IMapper mapper, IUserRepository userRepository)
         {
             _context = context;
             _mapper = mapper;
@@ -77,7 +77,7 @@ namespace $safeprojectname$.Services
         {
             int? result = null;
 
-            Usuarios entity = _mapper.Map<Usuarios>(data);
+            User entity = _mapper.Map<User>(data);
             _userRepository.AddUser(entity);
             await _context.SaveChangesAsync();
 
@@ -101,7 +101,7 @@ namespace $safeprojectname$.Services
 
             if (lastEntity != null)
             {
-                Usuarios entity = _mapper.Map(data, lastEntity);
+                User entity = _mapper.Map(data, lastEntity);
                 _userRepository.UpdateUser(entity);
                 await _context.SaveChangesAsync();
 
