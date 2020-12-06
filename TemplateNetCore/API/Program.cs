@@ -23,13 +23,14 @@ namespace API
                 {
                     webBuilder.UseStartup<Startup>();
                 })
-                //Borramos todos los registros de los loggers que vienen prerregistrados
+                //Serilog:
+                //We delete all the records of the loggers that are pre-registered
                 .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
                     logging.SetMinimumLevel(LogLevel.Debug);
                 })
-                //Añadimos Serilog obteniendo la configuración desde Microsoft.Extensions.Configuration
+                //We add Serilog obtaining the configuration from Microsoft.Extensions.Configuration
                 .UseSerilog((HostBuilderContext context, LoggerConfiguration loggerConfiguration) =>
                 {
                     loggerConfiguration.ReadFrom.Configuration(context.Configuration);
