@@ -1,14 +1,14 @@
-﻿using Core.DTO.Helpers;
-using Core.DTO.Usuarios;
-using Core.Helpers;
+﻿using $safeprojectname$.DTO.Helpers;
+using $safeprojectname$.DTO.User;
+using $safeprojectname$.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Interfaces.Services
+namespace $safeprojectname$.Interfaces.Services
 {
-    public interface IUsuarioService
+    public interface IUserService
     {
         /// <summary>
         /// Get User by Id

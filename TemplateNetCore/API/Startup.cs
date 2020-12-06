@@ -16,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
+using API.Assets.Middleware;
 
 namespace API
 {
@@ -31,50 +34,23 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Connection SQL
-            var connection = Configuration.GetConnectionString("LocalDB");
-
             //DbContext
-            services.AddDbContext<APIContext>(options => options.UseSqlServer(connection).EnableSensitiveDataLogging(true));
-
-            //Logger
-            services.AddLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddConsole()
-                    .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information);
-                loggingBuilder.AddDebug();
-            });
+            AddDbContexts(services, Configuration.GetConnectionString("LocalDB"));
 
             //AutoMapper
             services.AddAutoMapper(typeof(AutoMapping));
 
             //Authentication
+
+            //Policity
             services.AddCors();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "API",
-                    Description = "Template ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://www.Lynxview.com/")
-                });
-            });
+            AddSwagger(services);
 
             //Scrutor Dependency Injection
-            //Añadir el nombre completo del ensamblado (ejemplo:test.Core)
-            services.Scan(scan => scan
-                .FromAssemblies(Assembly.Load("Core"), Assembly.Load("Data"))
-                .AddClasses(c => c.Where(d =>
-                    d.Name.EndsWith("Service")
-                    || d.Name.EndsWith("Repository")
-                    || d.Name.EndsWith("Factory")
-                    || d.Name.EndsWith("Access")))
-                .AsImplementedInterfaces()
-                .WithScopedLifetime());
-
+            AddScrutor(services);
+            
             services.AddControllers();
         }
 
@@ -84,6 +60,7 @@ namespace API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                ConfigureSwagger(app);
             }
 
             app.UseStaticFiles();
@@ -94,28 +71,85 @@ namespace API
             app.UseRouting();
 
             // global cors policy
+            ConfigureCors(app);
+
+            ConfigureExceptionHandler(app);
+
+            app.UseAuthorization();
+
+            ConfigureUseEndPoints(app);
+        }
+
+        #region services
+
+        private void AddDbContexts(IServiceCollection services, string connection)
+        {
+            services.AddDbContext<APIContext>(options => options.UseSqlServer(connection).EnableSensitiveDataLogging(true));
+        }
+   
+        private void AddSwagger(IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "API",
+                    Description = "Template ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://www.Lynxview.com/")
+                });
+            });
+        }
+
+        private void AddScrutor(IServiceCollection services)
+        {
+            //Add full name assembly (ejemplo:test.Core)
+            services.Scan(scan => scan
+                .FromAssemblies(Assembly.Load("Core"), Assembly.Load("Data"))
+                .AddClasses(c => c.Where(d =>
+                    d.Name.EndsWith("Service")
+                    || d.Name.EndsWith("Repository")
+                    || d.Name.EndsWith("Factory")
+                    || d.Name.EndsWith("Access")))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime());
+        }
+
+        #endregion
+        #region Configure
+        private void ConfigureSwagger(IApplicationBuilder app)
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.OAuthAppName("API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
+            });
+        }
+
+        private void ConfigureCors(IApplicationBuilder app)
+        {
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
+        }
 
-            //Swagger
-            if (!env.IsProduction() || !env.IsStaging())
+        private void ConfigureExceptionHandler(IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(new ExceptionHandlerOptions
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.OAuthAppName("API V1");                    
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
-                });
-            }
+                ExceptionHandler = new JsonExceptionMiddleware().Invoke
+            });
+        }
 
-            app.UseAuthorization();
-
+        private void ConfigureUseEndPoints(IApplicationBuilder app)
+        {
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+        #endregion
     }
 }

@@ -1,4 +1,4 @@
-﻿using Core.DTO.Usuarios;
+﻿using Core.DTO.User;
 using Data.Data.APIContext.Models;
 using AutoMapper;
 using System;
@@ -13,17 +13,17 @@ namespace $safeprojectname$.Assets
         public AutoMapping()
         {
             #region Get Usuarios
-            CreateMap<Usuarios, DtoUser>()
-                .ForMember(des => des.Activo, opt => opt.MapFrom(c => Convert.ToBoolean(c.Activo)));
+            CreateMap<User, DtoUser>()
+                .ForMember(des => des.IsEnable, opt => opt.MapFrom(c => Convert.ToBoolean(c.IsEnable)));
             #endregion
             #region Post Usuarios
-            CreateMap<DtoUserCreate, Usuarios>()
+            CreateMap<DtoUserCreate, User>()
                 .ForMember(des=> des.Id, opt => opt.Ignore())
-                .ForMember(des => des.Activo, opt => opt.MapFrom(c => Convert.ToByte(c.Activo)));
+                .ForMember(des => des.IsEnable, opt => opt.MapFrom(c => Convert.ToByte(c.IsEnable)));
             #endregion
             #region Put Usuarios
-            CreateMap<DtoUserUpdate, Usuarios>()
-                .ForMember(des => des.Activo, opt => opt.MapFrom(c => Convert.ToByte(c.Activo)));
+            CreateMap<DtoUserUpdate, User>()
+                .ForMember(des => des.IsEnable, opt => opt.MapFrom(c => Convert.ToByte(c.IsEnable)));
             #endregion
         }
     }

@@ -19,23 +19,23 @@
       <Folder Name="Data" TargetFolderName="Data">
         <Folder Name="APIContext" TargetFolderName="APIContext">
           <Folder Name="Configurations" TargetFolderName="Configurations">
-            <ProjectItem ReplaceParameters="true" TargetFileName="UsuariosConfiguration.cs">UsuariosConfiguration.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="UserConfiguration.cs">UserConfiguration.cs</ProjectItem>
           </Folder>
           <Folder Name="Context" TargetFolderName="Context">
             <ProjectItem ReplaceParameters="true" TargetFileName="APIContext.cs">APIContext.cs</ProjectItem>
           </Folder>
           <Folder Name="Models" TargetFolderName="Models">
-            <ProjectItem ReplaceParameters="true" TargetFileName="Usuarios.cs">Usuarios.cs</ProjectItem>
+            <ProjectItem ReplaceParameters="true" TargetFileName="User.cs">User.cs</ProjectItem>
           </Folder>
         </Folder>
       </Folder>
       <Folder Name="Interfaces" TargetFolderName="Interfaces">
         <Folder Name="Repositories" TargetFolderName="Repositories">
-          <ProjectItem ReplaceParameters="true" TargetFileName="IUsuariosRepository.cs">IUsuariosRepository.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="IUserRepository.cs">IUserRepository.cs</ProjectItem>
         </Folder>
       </Folder>
       <Folder Name="Repositories" TargetFolderName="Repositories">
-        <ProjectItem ReplaceParameters="true" TargetFileName="UsuariosRepository.cs">UsuariosRepository.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="UserRepository.cs">UserRepository.cs</ProjectItem>
       </Folder>
     </Project>
   </TemplateContent>

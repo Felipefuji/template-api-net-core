@@ -6,30 +6,30 @@ using System.Text;
 
 namespace $safeprojectname$.Interfaces.Repositories
 {
-    public interface IUsuariosRepository
+    public interface IUserRepository
     {
         /// <summary>
         /// Get Entities from Users
         /// </summary>
         /// <returns></returns>
-        IQueryable<Usuarios> GetUsers();
+        IQueryable<User> GetUsers();
 
         /// <summary>
         /// Add new Entity Usuario
         /// </summary>
         /// <param name="entity"></param>
-        void AddUser(Usuarios entity);
+        void AddUser(User entity);
 
         /// <summary>
         /// Update Entity Usuario
         /// </summary>
         /// <param name="entity"></param>
-        void UpdateUser(Usuarios entity);
+        void UpdateUser(User entity);
 
         /// <summary>
         /// Delete Entity Usuarios
         /// </summary>
         /// <param name="entity"></param>
-        void DeleteUser(Usuarios entity);
+        void DeleteUser(User entity);
     }
 }

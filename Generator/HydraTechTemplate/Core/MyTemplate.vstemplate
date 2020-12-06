@@ -21,7 +21,7 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="DtoFilterPagedList.cs">DtoFilterPagedList.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="DtoTextValueGeneric.cs">DtoTextValueGeneric.cs</ProjectItem>
         </Folder>
-        <Folder Name="Usuarios" TargetFolderName="Usuarios">
+        <Folder Name="User" TargetFolderName="User">
           <ProjectItem ReplaceParameters="true" TargetFileName="DtoUser.cs">DtoUser.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="DtoUserCreate.cs">DtoUserCreate.cs</ProjectItem>
           <ProjectItem ReplaceParameters="true" TargetFileName="DtoUserUpdate.cs">DtoUserUpdate.cs</ProjectItem>
@@ -32,11 +32,11 @@
       </Folder>
       <Folder Name="Interfaces" TargetFolderName="Interfaces">
         <Folder Name="Services" TargetFolderName="Services">
-          <ProjectItem ReplaceParameters="true" TargetFileName="IUsuarioService.cs">IUsuarioService.cs</ProjectItem>
+          <ProjectItem ReplaceParameters="true" TargetFileName="IUserService.cs">IUserService.cs</ProjectItem>
         </Folder>
       </Folder>
       <Folder Name="Services" TargetFolderName="Services">
-        <ProjectItem ReplaceParameters="true" TargetFileName="UsuarioService.cs">UsuarioService.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="UserService.cs">UserService.cs</ProjectItem>
       </Folder>
     </Project>
   </TemplateContent>
