@@ -8,11 +8,11 @@ using System.Text;
 
 namespace API.Data.Repositories
 {
-    public class UsuariosRepository : IUsuariosRepository
+    public class UserRepository : IUserRepository
     {
         #region Constructor
         private readonly APIContext _context;
-        public UsuariosRepository(APIContext context)
+        public UserRepository(APIContext context)
         {
             _context = context;
         }
@@ -22,36 +22,36 @@ namespace API.Data.Repositories
         /// Get Entities from Users
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Usuarios> GetUsers()
+        public IQueryable<User> GetUsers()
         {
-            return _context.Usuarios;
+            return _context.Users;
         }
 
         /// <summary>
         /// Add new Entity Usuario
         /// </summary>
         /// <param name="entity"></param>
-        public void AddUser(Usuarios entity)
+        public void AddUser(User entity)
         {
-            _context.Usuarios.Add(entity);
+            _context.Users.Add(entity);
         }
 
         /// <summary>
         /// Update Entity Usuario
         /// </summary>
         /// <param name="entity"></param>
-        public void UpdateUser(Usuarios entity)
+        public void UpdateUser(User entity)
         {
-            _context.Usuarios.Update(entity);
+            _context.Users.Update(entity);
         }
 
         /// <summary>
         /// Delete Entity Usuarios
         /// </summary>
         /// <param name="entity"></param>
-        public void DeleteUser(Usuarios entity)
+        public void DeleteUser(User entity)
         {
-            _context.Usuarios.Remove(entity);
+            _context.Users.Remove(entity);
         }
     }
 }

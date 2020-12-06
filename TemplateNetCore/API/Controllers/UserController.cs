@@ -1,5 +1,5 @@
 ﻿using Core.DTO.Helpers;
-using Core.DTO.Usuarios;
+using Core.DTO.User;
 using Core.Helpers;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +12,11 @@ namespace API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class UserController : ControllerBase
     {
-        private readonly IUsuarioService _usuarioService;
+        private readonly IUserService _usuarioService;
 
-        public UsuariosController(IUsuarioService usuarioService) 
+        public UserController(IUserService usuarioService) 
         {
             _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
         }

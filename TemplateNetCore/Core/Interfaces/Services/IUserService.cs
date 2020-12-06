@@ -1,5 +1,5 @@
 ﻿using Core.DTO.Helpers;
-using Core.DTO.Usuarios;
+using Core.DTO.User;
 using Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces.Services
 {
-    public interface IUsuarioService
+    public interface IUserService
     {
         /// <summary>
         /// Get User by Id

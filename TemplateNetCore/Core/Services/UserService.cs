@@ -1,5 +1,5 @@
 ﻿using Core.DTO.Helpers;
-using Core.DTO.Usuarios;
+using Core.DTO.User;
 using Core.Helpers;
 using Core.Interfaces.Services;
 using Data.Data.APIContext.Context;
@@ -16,15 +16,15 @@ using System.Threading.Tasks;
 
 namespace Core.Services
 {
-    public class UsuarioService : IUsuarioService
+    public class UserService : IUserService
     {
         #region Constructor
 
         private readonly APIContext _context;
         private readonly IMapper _mapper;
-        private readonly IUsuariosRepository _userRepository;
+        private readonly IUserRepository _userRepository;
 
-        public UsuarioService(APIContext context, IMapper mapper, IUsuariosRepository userRepository)
+        public UserService(APIContext context, IMapper mapper, IUserRepository userRepository)
         {
             _context = context;
             _mapper = mapper;
@@ -77,7 +77,7 @@ namespace Core.Services
         {
             int? result = null;
 
-            Usuarios entity = _mapper.Map<Usuarios>(data);
+            User entity = _mapper.Map<User>(data);
             _userRepository.AddUser(entity);
             await _context.SaveChangesAsync();
 
@@ -101,7 +101,7 @@ namespace Core.Services
 
             if (lastEntity != null)
             {
-                Usuarios entity = _mapper.Map(data, lastEntity);
+                User entity = _mapper.Map(data, lastEntity);
                 _userRepository.UpdateUser(entity);
                 await _context.SaveChangesAsync();
 

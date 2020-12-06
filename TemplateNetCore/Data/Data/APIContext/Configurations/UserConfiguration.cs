@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Data.Data.APIContext.Configurations
 {
-    public class UsuariosConfiguration : IEntityTypeConfiguration<Usuarios>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Usuarios> builder) 
+        public void Configure(EntityTypeBuilder<User> builder) 
         {
             builder.HasKey(e => e.Id);
 
@@ -18,12 +18,12 @@ namespace Data.Data.APIContext.Configurations
             builder.Property(e => e.Id).ValueGeneratedOnAdd();
 
             builder.Property(e => e.Name).HasMaxLength(100);
-            builder.Property(e => e.Telefono).HasMaxLength(12);
+            builder.Property(e => e.Phone).HasMaxLength(12);
 
-            builder.Property(e => e.Activo).HasDefaultValueSql("((1))");
+            builder.Property(e => e.IsEnable).HasDefaultValueSql("((1))");
 
             //Definicion de un Filtro Global para las consultas 
-            builder.HasQueryFilter(c => c.Activo == 1);
+            builder.HasQueryFilter(c => c.IsEnable == 1);
         }
     }
 }

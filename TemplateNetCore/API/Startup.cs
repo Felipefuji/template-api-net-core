@@ -16,6 +16,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Events;
+using API.Assets.Middleware;
 
 namespace API
 {
@@ -37,14 +40,6 @@ namespace API
             //DbContext
             services.AddDbContext<APIContext>(options => options.UseSqlServer(connection).EnableSensitiveDataLogging(true));
 
-            //Logger
-            services.AddLogging(loggingBuilder =>
-            {
-                loggingBuilder.AddConsole()
-                    .AddFilter(DbLoggerCategory.Database.Command.Name, LogLevel.Information);
-                loggingBuilder.AddDebug();
-            });
-
             //AutoMapper
             services.AddAutoMapper(typeof(AutoMapping));
 
@@ -64,7 +59,7 @@ namespace API
             });
 
             //Scrutor Dependency Injection
-            //Añadir el nombre completo del ensamblado (ejemplo:test.Core)
+            //A?adir el nombre completo del ensamblado (ejemplo:test.Core)
             services.Scan(scan => scan
                 .FromAssemblies(Assembly.Load("Core"), Assembly.Load("Data"))
                 .AddClasses(c => c.Where(d =>
@@ -109,7 +104,14 @@ namespace API
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "API V1");
                 });
             }
-
+            if (env.IsDevelopment())
+            {
+                app.UseExceptionHandler(new ExceptionHandlerOptions
+                {
+                    ExceptionHandler = new JsonExceptionMiddleware().Invoke
+                });
+            }
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
