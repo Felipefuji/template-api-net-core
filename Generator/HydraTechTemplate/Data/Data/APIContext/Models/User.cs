@@ -4,15 +4,15 @@ using System.Text;
 
 namespace $safeprojectname$.$safeprojectname$.APIContext.Models
 {
-    public partial class Usuarios
+    public partial class User
     {
-        public Usuarios() 
+        public User() 
         {
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Telefono { get; set; }
-        public byte Activo { get; set; }
+        public string Phone { get; set; }
+        public byte IsEnable { get; set; }
     }
 }

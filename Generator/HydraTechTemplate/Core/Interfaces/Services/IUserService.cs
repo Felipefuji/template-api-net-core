@@ -1,5 +1,5 @@
 ﻿using $safeprojectname$.DTO.Helpers;
-using $safeprojectname$.DTO.Usuarios;
+using $safeprojectname$.DTO.User;
 using $safeprojectname$.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace $safeprojectname$.Interfaces.Services
 {
-    public interface IUsuarioService
+    public interface IUserService
     {
         /// <summary>
         /// Get User by Id
