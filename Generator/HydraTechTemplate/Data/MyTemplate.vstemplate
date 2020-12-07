@@ -34,6 +34,11 @@
           <ProjectItem ReplaceParameters="true" TargetFileName="IUserRepository.cs">IUserRepository.cs</ProjectItem>
         </Folder>
       </Folder>
+      <Folder Name="Migrations" TargetFolderName="Migrations">
+        <ProjectItem ReplaceParameters="true" TargetFileName="20201206234743_InitialCreate.cs">20201206234743_InitialCreate.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="20201206234743_InitialCreate.Designer.cs">20201206234743_InitialCreate.Designer.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="APIContextModelSnapshot.cs">APIContextModelSnapshot.cs</ProjectItem>
+      </Folder>
       <Folder Name="Repositories" TargetFolderName="Repositories">
         <ProjectItem ReplaceParameters="true" TargetFileName="UserRepository.cs">UserRepository.cs</ProjectItem>
       </Folder>
