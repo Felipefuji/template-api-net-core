@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
     <Name>API</Name>
-    <Description>API Template LynxView</Description>
+    <Description>API Template HydraTech</Description>
     <ProjectType>CSharp</ProjectType>
     <ProjectSubType>
     </ProjectSubType>
@@ -19,17 +19,19 @@
       <Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true" TargetFileName="launchSettings.json">launchSettings.json</ProjectItem>
       </Folder>
-      <Folder Name=".vs" TargetFolderName=".vs" />
       <Folder Name="Assets" TargetFolderName="Assets">
         <Folder Name="Middleware" TargetFolderName="Middleware">
           <ProjectItem ReplaceParameters="true" TargetFileName="JsonExceptionMiddleware.cs">JsonExceptionMiddleware.cs</ProjectItem>
         </Folder>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AuthExtensions.cs">AuthExtensions.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="AutoMapping.cs">AutoMapping.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="CustomContentTypes.cs">CustomContentTypes.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="JwtSettings.cs">JwtSettings.cs</ProjectItem>
         <ProjectItem ReplaceParameters="true" TargetFileName="SwaggerFileOperationFilter.cs">SwaggerFileOperationFilter.cs</ProjectItem>
       </Folder>
       <Folder Name="Controllers" TargetFolderName="Controllers">
-        <ProjectItem ReplaceParameters="true" TargetFileName="UserController.cs">UserController.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="AuthController.cs">AuthController.cs</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="ClientController.cs">ClientController.cs</ProjectItem>
       </Folder>
       <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.json">appsettings.json</ProjectItem>
       <ProjectItem ReplaceParameters="true" TargetFileName="appsettings.Development.json">appsettings.Development.json</ProjectItem>
