@@ -1,7 +1,7 @@
 ﻿<VSTemplate Version="3.0.0" Type="ProjectGroup" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
 	<TemplateData>
 		<Name>HydraTech Template API</Name>
-		<Description>Custom template for API in Net Core 3.1</Description>
+		<Description>Custom template for API in Net 5</Description>
 		<ProjectType>CSharp</ProjectType>
 		<ProjectSubType>
 		</ProjectSubType>
