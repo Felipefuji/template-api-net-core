@@ -8,50 +8,50 @@ using System.Text;
 
 namespace API.$safeprojectname$.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class ClientRepository : IClientRepository
     {
         #region Constructor
         private readonly APIContext _context;
-        public UserRepository(APIContext context)
+        public ClientRepository(APIContext context)
         {
             _context = context;
         }
         #endregion
 
         /// <summary>
-        /// Get Entities from Users
+        /// Get Entities from Client
         /// </summary>
         /// <returns></returns>
-        public IQueryable<User> GetUsers()
+        public IQueryable<Client> GetClient()
         {
-            return _context.Users;
+            return _context.Clients;
         }
 
         /// <summary>
-        /// Add new Entity Usuario
+        /// Add new Entity Client
         /// </summary>
         /// <param name="entity"></param>
-        public void AddUser(User entity)
+        public void AddClient(Client entity)
         {
-            _context.Users.Add(entity);
+            _context.Clients.Add(entity);
         }
 
         /// <summary>
-        /// Update Entity Usuario
+        /// Update Entity Client
         /// </summary>
         /// <param name="entity"></param>
-        public void UpdateUser(User entity)
+        public void UpdateClient(Client entity)
         {
-            _context.Users.Update(entity);
+            _context.Clients.Update(entity);
         }
 
         /// <summary>
-        /// Delete Entity Usuarios
+        /// Delete Entity Client
         /// </summary>
         /// <param name="entity"></param>
-        public void DeleteUser(User entity)
+        public void DeleteClient(Client entity)
         {
-            _context.Users.Remove(entity);
+            _context.Clients.Remove(entity);
         }
     }
 }

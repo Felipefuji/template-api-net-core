@@ -1,5 +1,5 @@
 ﻿using $safeprojectname$.DTO.Helpers;
-using $safeprojectname$.DTO.User;
+using $safeprojectname$.DTO.Client;
 using $safeprojectname$.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,41 +8,41 @@ using System.Threading.Tasks;
 
 namespace $safeprojectname$.Interfaces.Services
 {
-    public interface IUserService
+    public interface IClientService
     {
         /// <summary>
-        /// Get User by Id
-        /// </summary>
-        /// <param name="userEmail"></param>
-        /// <returns></returns>
-        Task<DtoUser> GetUserId(int id);
-
-        /// <summary>
-        /// Get All Users 
-        /// </summary>
-        /// <returns></returns>
-        Task<PagedList<DtoUser>> GetAllUsers(DtoFilterPagedList pagedListParams);
-
-
-        /// <summary>
-        /// Create User
-        /// </summary>
-        /// <param name="idUser"></param>
-        /// <returns></returns>
-        Task<int?> CreateUser(DtoUserCreate data);
-
-        /// <summary>
-        /// Update User
-        /// </summary>
-        /// <param name="idUser"></param>
-        /// <returns></returns>
-        Task<int?> UpdateUser(DtoUserUpdate data);
-
-        /// <summary>
-        /// Remove User by Id
+        /// Get Client by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task RemoveUser(int id);
+        Task<DtoClient> GetClientById(int id);
+
+        /// <summary>
+        /// Get All Client 
+        /// </summary>
+        /// <returns></returns>
+        Task<PagedList<DtoClient>> GetAllClients(DtoFilterPagedList pagedListParams);
+
+
+        /// <summary>
+        /// Create Client
+        /// </summary>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
+        Task<int?> CreateClient(DtoClientCreate data);
+
+        /// <summary>
+        /// Update Client
+        /// </summary>
+        /// <param name="idUser"></param>
+        /// <returns></returns>
+        Task<int?> UpdateClient(DtoClientUpdate data);
+
+        /// <summary>
+        /// Remove Client by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task RemoveClient(int id);
     }
 }

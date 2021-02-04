@@ -1,7 +1,8 @@
-﻿using Core.DTO.Helpers;
-using Core.DTO.User;
+﻿using Core.DTO.Client;
+using Core.DTO.Helpers;
 using Core.Helpers;
 using Core.Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,16 @@ using System.Threading.Tasks;
 
 namespace $safeprojectname$.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class ClientController : ControllerBase
     {
-        private readonly IUserService _usuarioService;
+        private readonly IClientService _clientService;
 
-        public UserController(IUserService usuarioService) 
+        public ClientController(IClientService clientService)
         {
-            _usuarioService = usuarioService ?? throw new ArgumentNullException(nameof(usuarioService));
+            _clientService = clientService ?? throw new ArgumentNullException(nameof(clientService));
         }
 
         /// <summary>
@@ -26,9 +28,9 @@ namespace $safeprojectname$.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ActionResult<PagedList<DtoUser>>> GetAll([FromQuery] DtoFilterPagedList pagedListParams)
+        public async Task<ActionResult<PagedList<DtoClient>>> GetAll([FromQuery] DtoFilterPagedList pagedListParams)
         {
-            PagedList<DtoUser> listUsers = await _usuarioService.GetAllUsers(pagedListParams);
+            PagedList<DtoClient> listUsers = await _clientService.GetAllClients(pagedListParams);
 
             if (listUsers == null || !listUsers.Any())
             {
@@ -46,7 +48,7 @@ namespace $safeprojectname$.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            DtoUser result = await _usuarioService.GetUserId(id);
+            DtoClient result = await _clientService.GetClientById(id);
 
             if (result == null)
             {
@@ -62,9 +64,9 @@ namespace $safeprojectname$.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<DtoUser>> Create([FromBody] DtoUserCreate user)
+        public async Task<ActionResult<DtoClient>> Create([FromBody] DtoClientCreate client)
         {
-            int? result = await _usuarioService.CreateUser(user);
+            int? result = await _clientService.CreateClient(client);
 
             if (result == null)
             {
@@ -80,9 +82,9 @@ namespace $safeprojectname$.Controllers
         /// <param name=""></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ActionResult<DtoUser>> Update([FromBody] DtoUserUpdate data)
+        public async Task<ActionResult<DtoClient>> Update([FromBody] DtoClientUpdate data)
         {
-            int? result = await _usuarioService.UpdateUser(data);
+            int? result = await _clientService.UpdateClient(data);
 
             if (result == null)
             {
@@ -98,9 +100,9 @@ namespace $safeprojectname$.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Remove(int id) 
+        public async Task<IActionResult> Remove(int id)
         {
-            await _usuarioService.RemoveUser(id);
+            await _clientService.RemoveClient(id);
 
             return Ok();
         }

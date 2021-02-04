@@ -1,5 +1,5 @@
 ﻿using $safeprojectname$.DTO.Helpers;
-using $safeprojectname$.DTO.User;
+using $safeprojectname$.DTO.Client;
 using $safeprojectname$.Helpers;
 using $safeprojectname$.Interfaces.Services;
 using Data.Data.APIContext.Context;
@@ -16,69 +16,69 @@ using System.Threading.Tasks;
 
 namespace $safeprojectname$.Services
 {
-    public class UserService : IUserService
+    public class ClientService : IClientService
     {
         #region Constructor
 
         private readonly APIContext _context;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
+        private readonly IClientRepository _clientRepository;
 
-        public UserService(APIContext context, IMapper mapper, IUserRepository userRepository)
+        public ClientService(APIContext context, IMapper mapper, IClientRepository clientRepository)
         {
             _context = context;
             _mapper = mapper;
-            _userRepository = userRepository;
+            _clientRepository = clientRepository;
         }
         #endregion
         #region Actions
 
         /// <summary>
-        /// Get User by Id
+        /// Get Client by Id
         /// </summary>
-        /// <param name="userEmail"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<DtoUser> GetUserId(int id)
+        public async Task<DtoClient> GetClientById(int id)
         {
-            DtoUser User = await _userRepository.GetUsers().AsNoTracking().Where(c => c.Id == id).ProjectTo<DtoUser>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+            DtoClient User = await _clientRepository.GetClient().AsNoTracking().Where(c => c.Id == id).ProjectTo<DtoClient>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
             return User;
         }
 
         /// <summary>
-        /// Get All Users 
+        /// Get All Client 
         /// </summary>
         /// <returns></returns>
-        public async Task<PagedList<DtoUser>> GetAllUsers(DtoFilterPagedList pagedListParams)
+        public async Task<PagedList<DtoClient>> GetAllClients(DtoFilterPagedList pagedListParams)
         {
             //Servicio con paginacion en servidor
 
-            PagedList<DtoUser> listResult = null;
+            PagedList<DtoClient> listResult = null;
 
-            var query = _userRepository.GetUsers().AsNoTracking().IgnoreQueryFilters().ProjectTo<DtoUser>(_mapper.ConfigurationProvider);
+            var query = _clientRepository.GetClient().AsNoTracking().IgnoreQueryFilters().ProjectTo<DtoClient>(_mapper.ConfigurationProvider);
 
             if (pagedListParams.Active)
             {
-                listResult = await PagedList<DtoUser>.ToPagedListAsync(query, pagedListParams.PageNumber, pagedListParams.PageSize);
+                listResult = await PagedList<DtoClient>.ToPagedListAsync(query, pagedListParams.PageNumber, pagedListParams.PageSize);
                 return listResult;
             }
 
-            listResult = await PagedList<DtoUser>.ToOnlyListAsync(query);
+            listResult = await PagedList<DtoClient>.ToOnlyListAsync(query);
 
             return listResult;
         }
 
 
         /// <summary>
-        /// Create User
+        /// Create Client
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
-        public async Task<int?> CreateUser(DtoUserCreate data)
+        public async Task<int?> CreateClient(DtoClientCreate data)
         {
             int? result = null;
 
-            User entity = _mapper.Map<User>(data);
-            _userRepository.AddUser(entity);
+            Client entity = _mapper.Map<Client>(data);
+            _clientRepository.AddClient(entity);
             await _context.SaveChangesAsync();
 
             result = entity.Id;
@@ -88,21 +88,21 @@ namespace $safeprojectname$.Services
         }
 
         /// <summary>
-        /// Update User
+        /// Update Client
         /// </summary>
         /// <param name="idUser"></param>
         /// <returns></returns>
-        public async Task<int?> UpdateUser(DtoUserUpdate data)
+        public async Task<int?> UpdateClient(DtoClientUpdate data)
         {
             int? result = null;
 
 
-            var lastEntity = await _userRepository.GetUsers().IgnoreQueryFilters().Where(c => c.Id == data.Id).FirstOrDefaultAsync();
+            var lastEntity = await _clientRepository.GetClient().IgnoreQueryFilters().Where(c => c.Id == data.Id).FirstOrDefaultAsync();
 
             if (lastEntity != null)
             {
-                User entity = _mapper.Map(data, lastEntity);
-                _userRepository.UpdateUser(entity);
+                Client entity = _mapper.Map(data, lastEntity);
+                _clientRepository.UpdateClient(entity);
                 await _context.SaveChangesAsync();
 
                 result = entity.Id;
@@ -112,17 +112,17 @@ namespace $safeprojectname$.Services
         }
 
         /// <summary>
-        /// Remove User by Id
+        /// Remove Client by Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task RemoveUser(int id) 
+        public async Task RemoveClient(int id)
         {
-            var entity = await _userRepository.GetUsers().IgnoreQueryFilters().Where(c => c.Id == id).FirstOrDefaultAsync();
+            var entity = await _clientRepository.GetClient().IgnoreQueryFilters().Where(c => c.Id == id).FirstOrDefaultAsync();
 
             if (entity != null)
             {
-                _userRepository.DeleteUser(entity);
+                _clientRepository.DeleteClient(entity);
                 await _context.SaveChangesAsync();
             }
         }

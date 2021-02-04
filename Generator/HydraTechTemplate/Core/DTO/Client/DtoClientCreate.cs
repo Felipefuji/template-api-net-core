@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace $safeprojectname$.DTO.User
+namespace $safeprojectname$.DTO.Client
 {
-    public class DtoUserCreate
+    public class DtoClientCreate
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Phone { get; set; }
+        public string Code { get; set; }
+        public string Telephone { get; set; }
+        public string Cif { get; set; }
         public bool IsEnable { get; set; }
     }
 }
