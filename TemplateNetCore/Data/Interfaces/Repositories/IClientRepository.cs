@@ -6,30 +6,30 @@ using System.Text;
 
 namespace Data.Interfaces.Repositories
 {
-    public interface IUserRepository
+    public interface IClientRepository
     {
         /// <summary>
-        /// Get Entities from Users
+        /// Get Entities from Client
         /// </summary>
         /// <returns></returns>
-        IQueryable<User> GetUsers();
+        IQueryable<Client> GetClient();
 
         /// <summary>
-        /// Add new Entity Usuario
+        /// Add new Entity Client
         /// </summary>
         /// <param name="entity"></param>
-        void AddUser(User entity);
+        void AddClient(Client entity);
 
         /// <summary>
-        /// Update Entity Usuario
+        /// Update Entity Client
         /// </summary>
         /// <param name="entity"></param>
-        void UpdateUser(User entity);
+        void UpdateClient(Client entity);
 
         /// <summary>
-        /// Delete Entity Usuarios
+        /// Delete Entity Client
         /// </summary>
         /// <param name="entity"></param>
-        void DeleteUser(User entity);
+        void DeleteClient(Client entity);
     }
 }

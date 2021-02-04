@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.DTO.User
+namespace Core.DTO.Client
 {
-    public class DtoUserUpdate
+    public class DtoClientUpdate
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Phone { get; set; }
+        public string Code { get; set; }
+        public string Telephone { get; set; }
+        public string Cif { get; set; }
         public bool IsEnable { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace Data.Data.APIContext.Context
         {
         }
 
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Client> Clients { get; set; }
 
         #region DbQuery
         // En esta region se pueden crear DbSet virtuales de consultas, por ejemplo para realizar un FromSql
@@ -32,7 +32,7 @@ namespace Data.Data.APIContext.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             modelBuilder.HasAnnotation("Relational:DefaultSchema", "db_owner");
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientConfiguration());
             //modelBuilder.Entity<AnalysisListQuery>().HasNoKey();
         }
     }

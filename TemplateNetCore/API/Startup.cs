@@ -19,6 +19,9 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Serilog.Events;
 using API.Assets.Middleware;
+using Data.Data.AuthContext.Models;
+using Data.Data.AuthContext.Context;
+using Microsoft.AspNetCore.Identity;
 
 namespace API
 {
@@ -41,7 +44,19 @@ namespace API
             services.AddAutoMapper(typeof(AutoMapping));
 
             //Authentication
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(1d);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+            }).AddEntityFrameworkStores<AuthContext>().AddDefaultTokenProviders();
 
+            services.Configure<JwtSettings>(Configuration.GetSection("Jwt"));
+
+            var jwtSettings = Configuration.GetSection("Jwt").Get<JwtSettings>();
+            services.AddAuth(jwtSettings);
             //Policity
             services.AddCors();
 
@@ -75,7 +90,7 @@ namespace API
 
             ConfigureExceptionHandler(app);
 
-            app.UseAuthorization();
+            app.UseAuth();
 
             ConfigureUseEndPoints(app);
         }
@@ -85,6 +100,7 @@ namespace API
         private void AddDbContexts(IServiceCollection services, string connection)
         {
             services.AddDbContext<APIContext>(options => options.UseSqlServer(connection).EnableSensitiveDataLogging(true));
+            services.AddDbContext<AuthContext>(options => options.UseSqlServer(connection).EnableSensitiveDataLogging(true));
         }
    
         private void AddSwagger(IServiceCollection services)
@@ -96,8 +112,32 @@ namespace API
                     Version = "v1",
                     Title = "API",
                     Description = "Template ASP.NET Core Web API",
-                    TermsOfService = new Uri("https://www.Lynxview.com/")
+                    TermsOfService = new Uri("https://hydratech.es/")
                 });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT containing userid claim",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                });
+                var security =
+                    new OpenApiSecurityRequirement
+                    {
+                        {
+                            new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Id = "Bearer",
+                                    Type = ReferenceType.SecurityScheme
+                                },
+                                UnresolvedReference = true
+                            },
+                            new List<string>()
+                        }
+                    };
+                options.AddSecurityRequirement(security);
             });
         }
 

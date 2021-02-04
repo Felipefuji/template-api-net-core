@@ -6,27 +6,34 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Data.Migrations
+namespace Data.Migrations.API
 {
     [DbContext(typeof(APIContext))]
-    [Migration("20201206234743_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210204190925_InitialMigrationAPI")]
+    partial class InitialMigrationAPI
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("db_owner")
-                .HasAnnotation("ProductVersion", "3.1.7")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.2");
 
-            modelBuilder.Entity("Data.Data.APIContext.Models.User", b =>
+            modelBuilder.Entity("Data.Data.APIContext.Models.Client", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cif")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasColumnName("CIF");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<byte>("IsEnable")
                         .ValueGeneratedOnAdd()
@@ -34,16 +41,17 @@ namespace Data.Migrations
                         .HasDefaultValueSql("((1))");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(12)")
-                        .HasMaxLength(12);
+                    b.Property<string>("Telephone")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios","dbo");
+                    b.ToTable("Client", "dbo");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,17 +1,14 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.DTO.User
+namespace Data.Data.AuthContext.Models
 {
-    public class DtoUser
+    public class User : IdentityUser<Guid>
     {
-        public string Email { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
-
-        public string Password { get; set; }
     }
 }
